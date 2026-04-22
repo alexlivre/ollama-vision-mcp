@@ -21,6 +21,7 @@ class Config:
         self.ollama_url = self._get_config("ollama_url", "http://localhost:11434")
         self.default_model = self._get_config("default_model", "llava-phi3")
         self.timeout = self._get_config("timeout", 120)  # 2 minutes default
+        self.thinking_mode = self._get_config("thinking_mode", False)  # Disabled by default for speed
         self.log_level = self._get_config("log_level", "INFO")
         self.cache_enabled = self._get_config("cache_enabled", False)
         self.cache_ttl = self._get_config("cache_ttl", 3600)  # 1 hour

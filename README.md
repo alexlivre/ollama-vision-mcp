@@ -6,7 +6,7 @@ A Model Context Protocol (MCP) server that provides powerful computer vision cap
 
 - **Local Processing**: All image analysis happens on your machine - no cloud APIs, no costs
 - **Privacy First**: Your images never leave your computer
-- **Multiple Vision Models**: Support for llava-phi3, llava:7b, llava:13b, and bakllava
+- **Multiple Vision Models**: Support for llava-phi3, llava:7b, llava:13b, bakllava, qwen3.5, gemma, and -vl models
 - **Comprehensive Tools**:
   - `analyze_image` - Custom image analysis with optional prompts
   - `describe_image` - Detailed image descriptions
@@ -54,6 +54,9 @@ Other available models:
 ollama pull llava:7b     # More capable, requires more RAM
 ollama pull llava:13b    # Most capable, requires significant RAM
 ollama pull bakllava     # Alternative vision model
+ollama pull qwen3.5     # Qwen vision model
+ollama pull gemma       # Gemma vision model
+ollama pull <model>-vl  # Vision-language models with -vl suffix
 ```
 
 ### 4. Test Ollama
@@ -147,7 +150,30 @@ export OLLAMA_VISION_TIMEOUT=120
 
 # Log level (default: INFO)
 export OLLAMA_VISION_LOG_LEVEL=INFO
+
+# Thinking mode - disabled by default for speed (default: false)
+export OLLAMA_VISION_THINKING_MODE=false
 ```
+
+### Thinking Mode
+
+The thinking mode is **disabled by default** for faster responses. When enabled, the model shows its reasoning process before giving the final answer, which takes longer but can provide more detailed analysis.
+
+**To enable thinking mode**, you must manually configure it (AI assistants cannot enable it themselves):
+
+**Option 1 - Environment variable:**
+```bash
+export OLLAMA_VISION_THINKING_MODE=true
+```
+
+**Option 2 - Configuration file:**
+```json
+{
+  "thinking_mode": true
+}
+```
+
+**Note**: Thinking mode adds significant latency to responses as the model performs additional reasoning steps before producing output.
 
 ### Timeout Configuration for MCP Clients
 
@@ -185,12 +211,16 @@ Create `ollama-vision-config.json` in your working directory:
   "default_model": "llava-phi3",
   "timeout": 120,
   "log_level": "INFO",
+  "thinking_mode": false,
   "cache_enabled": false,
+  "cache_ttl": 3600,
   "model_preferences": [
     "llava-phi3",
     "llava:7b",
     "llava:13b",
-    "bakllava"
+    "bakllava",
+    "qwen3.5",
+    "gemma"
   ]
 }
 ```

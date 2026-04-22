@@ -40,7 +40,7 @@ class OllamaClient:
                         vision_models = []
                         for model in models:
                             name = model.get("name", "")
-                            if any(vm in name for vm in ["llava", "bakllava", "vision"]):
+                            if any(vm in name for vm in ["llava", "bakllava", "vision", "qwen3.5", "gemma", "-vl"]):
                                 vision_models.append(name)
                         return vision_models
                     return []
@@ -73,7 +73,8 @@ class OllamaClient:
             "model": model,
             "prompt": prompt,
             "images": [image_data],
-            "stream": False
+            "stream": False,
+            "think": self.config.thinking_mode
         }
         
         try:
