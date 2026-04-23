@@ -150,30 +150,7 @@ export OLLAMA_VISION_TIMEOUT=120
 
 # Log level (default: INFO)
 export OLLAMA_VISION_LOG_LEVEL=INFO
-
-# Thinking mode - disabled by default for speed (default: false)
-export OLLAMA_VISION_THINKING_MODE=false
 ```
-
-### Thinking Mode
-
-The thinking mode is **disabled by default** for faster responses. When enabled, the model shows its reasoning process before giving the final answer, which takes longer but can provide more detailed analysis.
-
-**To enable thinking mode**, you must manually configure it (AI assistants cannot enable it themselves):
-
-**Option 1 - Environment variable:**
-```bash
-export OLLAMA_VISION_THINKING_MODE=true
-```
-
-**Option 2 - Configuration file:**
-```json
-{
-  "thinking_mode": true
-}
-```
-
-**Note**: Thinking mode adds significant latency to responses as the model performs additional reasoning steps before producing output.
 
 ### Timeout Configuration for MCP Clients
 
@@ -211,7 +188,6 @@ Create `ollama-vision-config.json` in your working directory:
   "default_model": "llava-phi3",
   "timeout": 120,
   "log_level": "INFO",
-  "thinking_mode": false,
   "cache_enabled": false,
   "cache_ttl": 3600,
   "model_preferences": [
