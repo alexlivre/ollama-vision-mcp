@@ -26,6 +26,7 @@ class Config:
         self.log_level = self._get_config("log_level", "INFO")
         self.cache_enabled = self._get_config("cache_enabled", False)
         self.cache_ttl = self._get_config("cache_ttl", 3600)  # 1 hour
+        self.keep_alive = self._get_config("keep_alive", 3600)  # Keep model in memory for 1 hour by default
         
         # Vision model preferences in order
         self.model_preferences = self._get_config("model_preferences", [
@@ -108,6 +109,7 @@ class Config:
             "log_level": "INFO",
             "cache_enabled": False,
             "cache_ttl": 3600,
+            "keep_alive": 3600,  # Keep model in memory (in seconds)
             "model_preferences": [
                 "llava-phi3",
                 "llava:7b",

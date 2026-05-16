@@ -74,7 +74,8 @@ class OllamaClient:
             "prompt": prompt,
             "images": [image_data],
             "stream": False,
-            "think": False  # Disabled by default - to enable, modify source code
+            "think": False,  # Disabled by default - to enable, modify source code
+            "keep_alive": self.config.keep_alive
         }
         
         try:
